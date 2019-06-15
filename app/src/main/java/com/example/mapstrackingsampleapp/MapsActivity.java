@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
-import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -21,11 +21,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-
     private GoogleMap mMap;
     private DatabaseReference mDatabase;
-    private ArrayList<Marker> realTimeMarker = new ArrayList<>();
-    private ArrayList<Marker> tmpRealTimeMarker = new ArrayList<>();
+    private ArrayList<Marker> markers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,24 +72,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mDatabase.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (Marker marker : realTimeMarker)
+                for (Marker marker : markers)
                     marker.remove();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     LocationModel locationModel = snapshot.getValue(LocationModel.class);
-                    if (locationModel != null) {
-                        double latitude = locationModel.getLatitude();
-                        double longitude = locationModel.getLongitude();
-                        MarkerOptions markerOptions = new MarkerOptions();
-                        markerOptions.position(new LatLng(latitude, longitude));
-                        markerOptions.snippet("Latitude: " + latitude + ", " + "Longitude: " + longitude);
-                        tmpRealTimeMarker.add(mMap.addMarker(markerOptions));
-                    }
+                    if (locationModel != null)
+                        plotMarkers(locationModel);
                 }
-
-                realTimeMarker.clear();
-                realTimeMarker.addAll(tmpRealTimeMarker);
-
                 countDownTimer();
             }
 
@@ -100,5 +88,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
+    }
+
+    private void plotMarkers(LocationModel locationModel) {
+        double latitude = locationModel.getLatitude();
+        double longitude = locationModel.getLongitude();
+        LatLng latLng = new LatLng(latitude, longitude);
+        markers.add(mMap.addMarker(new MarkerOptions()
+                .position(latLng)
+                .title("Position")
+                .snippet("Latitude: " + latitude + ", " +
+                        "Longitude: " + longitude)));
     }
 }
