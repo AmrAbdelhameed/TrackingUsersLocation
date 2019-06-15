@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "103407325716",
+    "firebase_url": "https://mapstrackingsampleapp.firebaseio.com",
+    "project_id": "mapstrackingsampleapp",
+    "storage_bucket": "mapstrackingsampleapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103407325716:android:881dea6839940fd1",
+        "android_client_info": {
+          "package_name": "com.example.mapstrackingsampleapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "103407325716-nesmf1bae6h1at6f8ai5tt8cpmas9pi4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mapstrackingsampleapp",
+            "certificate_hash": "b11db9233b07b06ad9690ae5ae15aa80a2971a45"
+          }
+        },
+        {
+          "client_id": "103407325716-ja0hnpdi7kqh44i2e1alptfv14b202ej.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgpdm37mLdlKbO_5l6CqLJx_BTp0wsVE8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "103407325716-ja0hnpdi7kqh44i2e1alptfv14b202ej.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
